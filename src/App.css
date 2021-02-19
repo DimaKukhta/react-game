@@ -1,0 +1,23 @@
+.game-field {
+  width: 500px;
+  height: 500px;
+  border: 1px solid black;
+  position: relative;
+  margin: 150px auto;
+}
+.snake-body {
+  position: absolute;
+  width: 2%;
+  height: 2%;
+  background-color: black;
+  border: 1px solid black;
+  z-index: 2;
+}
+
+.food {
+  width: 2%;
+  height: 2%;
+  background-color: red;
+  position: absolute;
+  z-index: 1;
+}
