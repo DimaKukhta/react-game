@@ -1,28 +1,27 @@
 import React from 'react';
 import Snake from './Snake';
 import Food from './Food';
-import './App.css';
+import '../../App.css';
 
 const getRandomNumbers = () => {
-  let min = 1;
-  let max = 98;
-  let x = Math.floor((Math.random()*(max-min+1)+min)/2)*2;
-  let y =  Math.floor((Math.random()*(max-min+1)+min)/2)*2;
-  return [x,y]
-}
+    let min = 1;
+    let max = 98;
+    let x = Math.floor((Math.random()*(max-min+1)+min)/2)*2;
+    let y =  Math.floor((Math.random()*(max-min+1)+min)/2)*2;
+    return [x,y]
+  }
+  
+  const startState = {
+    snakeBody: [
+      [0, 0],
+      [2, 0]
+    ],
+    food: getRandomNumbers(),
+    direction: 'RIGHT',
+    speed: 200
+  }
 
-const startState = {
-  snakeBody: [
-    [0, 0],
-    [2, 0]
-  ],
-  food: getRandomNumbers(),
-  direction: 'RIGHT',
-  speed: 200
-}
-
-
-class App extends React.Component {
+class StartGame extends React.Component {
   constructor() {
     super();
     this.state = startState;
@@ -130,4 +129,4 @@ class App extends React.Component {
   }
 }
 
-export default App;
+export default startGame;
