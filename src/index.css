@@ -3,7 +3,7 @@
   height: 500px;
   border-radius: 1px solid black;
   position: relative;
-  margin: 150px auto;
+  /*margin: px auto;*/
 }
 .snake {
   position: absolute;

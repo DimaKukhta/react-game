@@ -9,7 +9,7 @@ function Snake(props) {
                     top: `${body[1]}%`
                 }
                 return (
-                    <div className="snake-body" key={index} style={style} />
+                    <div className='snake-body default' key={index} style={style} />
                 )
             })}
         </div>   
