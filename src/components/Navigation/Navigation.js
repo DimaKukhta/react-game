@@ -20,6 +20,9 @@ function Navigation () {
             <li>
                 <NavLink to="/best-game">Statistics</NavLink>
             </li>
+            <li>
+                <NavLink to="/top-players">Top players</NavLink>
+            </li>
              
         </ul>
     )

@@ -3,7 +3,7 @@ import Snake from './Snake';
 import Food from './Food';
 import Score from './Score';
 import Log from './Log';
-import { saveToLocalStorageBestGame, getLocalStorage } from '../../utils'; 
+import { saveToLocalStorageBestGame, getLocalStorage, updateBestPlayersList } from '../../utils'; 
 import '../../App.css';
 
 const getRandomNumbers = () => {
@@ -22,7 +22,7 @@ const getRandomNumbers = () => {
     localStorage.setItem('state', JSON.stringify(state));
   }
   
-  const startState = {
+  let startState = {
     snakeBody: [
       [0, 0],
       [2, 0]
@@ -32,7 +32,8 @@ const getRandomNumbers = () => {
     speed: getLocalStorage('speed'),
     counter: 0,
     lose: false,
-    autoPlay: false
+    autoPlay: false,
+    defaultMode: getLocalStorage('default-mode')
   }
 
   const volumeOfSound = (value) => JSON.parse(localStorage.getItem(value)) / 10;
@@ -110,14 +111,38 @@ class StartGame extends React.Component {
     //alert('You lose');
     document.removeEventListener('keydown', this.oneKeyDown);
     clearInterval(this.timer);
-    saveToLocalStorageBestGame(this.state.counter);
     this.backgroundAudio.muted = true;
     if (getLocalStorage('audio-effect')) {
       this.errorAudio.play();
     }
+    if (this.state.autoPlay === false) {
+      saveToLocalStorageBestGame(this.state.counter);
+      updateBestPlayersList(this.state.counter);
+    }
   }
 
   componentDidMount() {
+    startState.speed = getLocalStorage('speed');
+    this.setState({
+      speed: getLocalStorage('speed')
+    });/* = {
+      snakeBody: [
+        [0, 0],
+        [2, 0
+      ],
+      food: getRandomNumbers(),
+      direction: 'RIGHT',
+      speed: getLocalStorage('speed'),
+      counter: 0,
+      lose: false,
+      autoPlay: false,
+      defaultMode: getLocalStorage('default-mode')
+    }*/
+
+    console.log(this.state.speed)
+    console.log(getLocalStorage('speed'))
+    console.log(startState)
+
     this.timer = setInterval(this.moveSnake, this.state.speed);
     document.addEventListener('keydown', this.oneKeyDown);
 
@@ -150,6 +175,7 @@ class StartGame extends React.Component {
     this.backgroundAudio.muted = true;
     this.audio.muted = true;
     this.errorAudio.muted = true;
+    clearInterval(this.timer);
   }
 
   moveSnake = () => {
@@ -198,8 +224,8 @@ class StartGame extends React.Component {
   render() {
     return (
       <div className="game-container">
-        <div className="game-field">
-          <Snake snakeBody={this.state.snakeBody}/>
+        <div className={getLocalStorage('default-mode') === true ? 'game-field default' : 'game-field'}>
+          <Snake snakeBody={this.state.snakeBody} mode={this.state.defaultMode}/>
           <Food food={this.state.food} />
           <Log lose={this.state.lose} counter={this.state.counter}/>
         </div>
