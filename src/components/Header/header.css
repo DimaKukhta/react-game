@@ -3,8 +3,18 @@
     height: 50px;
     display: flex;
     justify-content: space-between;
+    align-items: center;
     padding: 0px 20px;
 }
+
 .back-arrow {
     width: 50px;
+}
+
+.full-screen {
+    width: 35px;
+}
+
+.full-screen:hover {
+    cursor: pointer;
 }
