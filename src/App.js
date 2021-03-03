@@ -23,15 +23,14 @@ class App extends React.Component {
       <BrowserRouter>
         <div className="game">
           <Header />
-          <Route path="/new-game" render={() => <StartGame mode="new-game"/>}></Route>
-          <Route path="/continue-game" render={() => <StartGame mode="continue-game" />}></Route>
+          <Route path="/start-game" component={StartGame}></Route>
           <Route path="/menu" component={Navigation}></Route>
           <Route path="/best-game" component={BestGames}></Route>
           <Route path="/audio-effect" component={AudioSettings}></Route>
           <Route path="/game-mode" component={GameMode}></Route>
           <Route path="/top-players" component={TopPlayers}></Route>
           <Route path="/auth-nickName" component={AuthNickName}></Route>
-          {getLocalStorage('first-game') ? <Redirect from="*" to="/auth-nickName"></Redirect> : <Redirect from="/" to="/menu"></Redirect>}
+          {getLocalStorage('first-game') ? <Redirect from="*" to="/auth-nickName"></Redirect> : <Redirect exact from="/" to="/menu"></Redirect>}
           <Footer />
        </div>
       </BrowserRouter>

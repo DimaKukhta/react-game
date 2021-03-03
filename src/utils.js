@@ -1,14 +1,11 @@
 export const saveToLocalStorageBestGame = (score) => {
-    console.log(score);
     const data = JSON.parse(localStorage.getItem('best-game')) || [];
     const result = {
         score: score,
         date: new Date()
     };
     data.push(result);
-    console.log(data);
     data.sort((a, b) => a.score < b.score ? 1 : -1);
-    console.log(data);
     localStorage.setItem('best-game', JSON.stringify(data.slice(0, 10)));
 }
 
@@ -36,7 +33,8 @@ export const getInitialStateToLocalSotage = () => {
         setLocalStorage('audio-effect-volume', 10);
         setLocalStorage('speed', 50);
         setLocalStorage('nick-name', 'Player' + Math.floor(Math.random() * 100));
-        setLocalStorage('first-game', 'true');
+        setLocalStorage('first-game', true);
+        setLocalStorage('crazy-mode', false);
     }
 }
 

@@ -48,6 +48,9 @@ class StartGame extends React.Component {
       this.setState({ direction: 'LEFT' });
     } else if (e.keyCode === 39 && this.state.direction != 'LEFT') {
       this.setState({ direction: 'RIGHT' });
+    } else if (e.keyCode === 32) {
+      this.setState({ lose: true })
+      this.gameExit();
     }
   }
 
@@ -119,12 +122,16 @@ class StartGame extends React.Component {
     this.audio = new Audio('https://english-for-kids.netlify.app/static/media/correct.8e3d6124.mp3');
     this.backgroundAudio = new Audio('https://soundimage.org/wp-content/uploads/2014/08/Netherplace.mp3');
     this.errorAudio = new Audio('https://english-for-kids.netlify.app/static/media/error.32fc22b2.mp3');
+    this.backgroundAudioAction = new Audio('https://www.playonloop.com/previews/POL-guilty-one-preview.mp3');
 
     this.backgroundAudio.volume = volumeOfSound('background-audio-volume');
     this.audio.volume = volumeOfSound('audio-effect-volume');
     this.errorAudio.volume = volumeOfSound('audio-effect-volume');
+    this.backgroundAudioAction.volume = volumeOfSound('background-audio-volume');
 
-    if (getLocalStorage('background-audio')) {
+    if (getLocalStorage('background-audio') && getLocalStorage('crazy-mode') && getLocalStorage('speed') === 20) {
+      this.backgroundAudioAction.play();
+    } else if (getLocalStorage('background-audio')) {
       this.backgroundAudio.play();
     }
   }
@@ -148,6 +155,7 @@ class StartGame extends React.Component {
     this.backgroundAudio.muted = true;
     this.audio.muted = true;
     this.errorAudio.muted = true;
+    this.backgroundAudioAction.muted = true;
     clearInterval(this.timer);
     
   }

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { NavLink } from 'react-router-dom';
 import './navigation.css';
 
@@ -6,10 +6,7 @@ function Navigation () {
     return (
         <ul className="navigation">
             <li>
-                <NavLink to="/new-game">Start Game</NavLink>
-            </li>
-            <li>
-                <NavLink to="/continue-game">Continue Game</NavLink>
+                <NavLink to="/start-game">Start Game</NavLink>
             </li>
             <li>
                 <NavLink to="/game-mode">Game mode</NavLink>

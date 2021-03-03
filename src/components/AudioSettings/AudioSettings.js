@@ -23,7 +23,6 @@ const AudioSettings = () => {
 
     const changeVolumeOfAudioEffect = (e) => {
         setVolumeAudioEffect(e.target.value);
-        console.log(e.target.value)
         setLocalStorage('audio-effect-volume', e.target.value);
     }
 

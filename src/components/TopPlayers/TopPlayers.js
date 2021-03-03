@@ -24,6 +24,7 @@ const TopPlayers = () => {
             {loading
             ?   <div className="lds-roller"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div>
             :   <ul>
+                    <li>Nick-name / score / date</li>
                     {data.map((element, index) => <li key={index}>{index + 1}. {element.nickName}, {element.score}, {element.date}</li>)}
                 </ul>
             }
