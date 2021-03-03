@@ -1,0 +1,28 @@
+import React, { useEffect } from 'react';
+import { NavLink } from 'react-router-dom';
+import './navigation.css';
+
+function Navigation () {
+    return (
+        <ul className="navigation">
+            <li>
+                <NavLink to="/start-game">Start Game</NavLink>
+            </li>
+            <li>
+                <NavLink to="/game-mode">Game mode</NavLink>
+            </li>
+            <li>
+                <NavLink to="/audio-effect">Settings</NavLink>
+            </li>
+            <li>
+                <NavLink to="/best-game">Statistics</NavLink>
+            </li>
+            <li>
+                <NavLink to="/top-players">Top players</NavLink>
+            </li>
+             
+        </ul>
+    )
+}
+
+export default Navigation;

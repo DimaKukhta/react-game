@@ -1,0 +1,13 @@
+.snake-body {
+    position: absolute;
+    width: 2%;
+    height: 2%;
+    background-color: white;
+    border: 1px solid white;
+    z-index: 2;
+}
+  
+.snake-body.default {
+    background-color: black;
+    border: 1px solid white;
+}
