@@ -6,7 +6,7 @@ const getBestGames = () => {
 
 const BestGame = () => {
     let bestGame = getBestGames();
-bestGame = bestGame.map((element, index) => <li key={index}>{index + 1}. Score: {element.score}, {element.date}</li>);
+    bestGame = bestGame.map((element, index) => <li key={index}>{index + 1}. Score: {element.score}, {element.date}</li>);
     return (
         <ul>
             <li>Best score / date</li>

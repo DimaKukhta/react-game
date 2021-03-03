@@ -1,6 +1,6 @@
 import React from 'react';
 import {BrowserRouter, Route, Redirect} from 'react-router-dom'
-import StartGame from './components/game/StartGame';
+import StartGame from './components/game/StartGame/StartGame';
 import Navigation from './components/Navigation/Navigation';
 import Header from './components/Header/Header';
 import Footer from './components/Footer/Footer';

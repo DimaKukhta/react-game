@@ -62,3 +62,21 @@ export const getBestPlayers = async () => {
     const json = await response.json();
     return json;
 }
+
+export const getRandomNumbers = () => {
+    let min = 1;
+    let max = 98;
+    let x = Math.floor((Math.random() * (max - min + 1) + min) / 2) * 2;
+    let y = Math.floor((Math.random() * (max - min + 1) + min) / 2) * 2;
+    return [x,y]
+}
+
+export const getStateFromLocalStorage = () => {
+    return JSON.parse(localStorage.getItem('state'));
+}
+
+export const updateLocalStorage = (state) => {
+    localStorage.setItem('state', JSON.stringify(state));
+}
+
+export const volumeOfSound = (value) => JSON.parse(localStorage.getItem(value)) / 10;

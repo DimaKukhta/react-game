@@ -1,5 +1,6 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
+import './log.css'
 
 function Log(props) {
     return (    

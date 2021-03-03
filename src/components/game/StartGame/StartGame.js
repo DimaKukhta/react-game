@@ -1,50 +1,38 @@
 import React from 'react';
-import Snake from './Snake';
-import Food from './Food';
-import Score from './Score';
-import Log from './Log';
-import { saveToLocalStorageBestGame, getLocalStorage, updateBestPlayersList } from '../../utils'; 
-import '../../App.css';
+import Snake from './Snake/Snake';
+import Food from './Food/Food';
+import Score from './Score/Score';
+import Log from './Log/Log';
+import { saveToLocalStorageBestGame,
+         getLocalStorage,
+         updateBestPlayersList,
+         getRandomNumbers,
+         getStateFromLocalStorage,
+         updateLocalStorage,
+         volumeOfSound } from '../../../utils'; 
+import './startGame.css';
 
-const getRandomNumbers = () => {
-    let min = 1;
-    let max = 98;
-    let x = Math.floor((Math.random() * (max - min + 1) + min) / 2) * 2;
-    let y = Math.floor((Math.random() * (max - min + 1) + min) / 2) * 2;
-    return [x,y]
-  }
-
-  const getStateFromLocalStorage = () => {
-    return JSON.parse(localStorage.getItem('state'));
-  }
-
-  const updateLocalStorage = (state) => {
-    localStorage.setItem('state', JSON.stringify(state));
-  }
-  
-  let startState = {
-    snakeBody: [
-      [0, 0],
-      [2, 0]
-    ],
-    food: getRandomNumbers(),
-    direction: 'RIGHT',
-    speed: getLocalStorage('speed'),
-    counter: 0,
-    lose: false,
-    autoPlay: false,
-    defaultMode: getLocalStorage('default-mode')
-  }
-
-  const volumeOfSound = (value) => JSON.parse(localStorage.getItem(value)) / 10;
+let startState = {
+  snakeBody: [
+    [0, 0],
+    [2, 0]
+  ],
+  food: getRandomNumbers(),
+  direction: 'RIGHT',
+  speed: getLocalStorage('speed'),
+  counter: 0,
+  lose: false,
+  autoPlay: false,
+  defaultMode: getLocalStorage('default-mode')
+}
 
 class StartGame extends React.Component {
   constructor(props) {
     super(props);
-    if (!localStorage.getItem('state') || this.props.mode === 'new-game') {
+    if (!localStorage.getItem('state')) {
       this.state = startState;
     }
-    else if (this.props.mode === 'continue-game') { 
+    else { 
       this.state = getStateFromLocalStorage();
     }
     this.timer = null;
@@ -76,7 +64,6 @@ class StartGame extends React.Component {
     snake.pop();
     snake.forEach((body, index) => {
       if (head[0] === body[0] && head[1] === body[1] && index < snake.length - 1) {
-        console.log('crush by body')
         this.gameExit();
       }
     })  
@@ -108,7 +95,6 @@ class StartGame extends React.Component {
 
   gameExit = () => {
     this.setState({ ...startState, lose: true, counter: this.state.counter });
-    //alert('You lose');
     document.removeEventListener('keydown', this.oneKeyDown);
     clearInterval(this.timer);
     this.backgroundAudio.muted = true;
@@ -125,23 +111,7 @@ class StartGame extends React.Component {
     startState.speed = getLocalStorage('speed');
     this.setState({
       speed: getLocalStorage('speed')
-    });/* = {
-      snakeBody: [
-        [0, 0],
-        [2, 0
-      ],
-      food: getRandomNumbers(),
-      direction: 'RIGHT',
-      speed: getLocalStorage('speed'),
-      counter: 0,
-      lose: false,
-      autoPlay: false,
-      defaultMode: getLocalStorage('default-mode')
-    }*/
-
-    console.log(this.state.speed)
-    console.log(getLocalStorage('speed'))
-    console.log(startState)
+    });
 
     this.timer = setInterval(this.moveSnake, this.state.speed);
     document.addEventListener('keydown', this.oneKeyDown);
@@ -167,6 +137,9 @@ class StartGame extends React.Component {
   }
 
   componentWillUnmount() {
+    if (this.state.lose) {
+      localStorage.removeItem('state');
+    }
     if (this.state.autoPlay === true) {
       this.setState({
         ...startState, autoPlay: true
@@ -176,6 +149,7 @@ class StartGame extends React.Component {
     this.audio.muted = true;
     this.errorAudio.muted = true;
     clearInterval(this.timer);
+    
   }
 
   moveSnake = () => {

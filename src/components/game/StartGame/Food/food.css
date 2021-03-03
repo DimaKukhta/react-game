@@ -1,0 +1,7 @@
+.food {
+    width: 2%;
+    height: 2%;
+    background-color: red;
+    position: absolute;
+    z-index: 1;
+  }

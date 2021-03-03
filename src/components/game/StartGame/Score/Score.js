@@ -1,5 +1,4 @@
 import React from 'react';
-import Snake from './Snake';
 
 function Score(props) {
     return (

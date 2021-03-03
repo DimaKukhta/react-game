@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { getBestPlayers } from './../../utils';
+import './topPlayers.css';
 
 
 

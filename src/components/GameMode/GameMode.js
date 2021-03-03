@@ -3,8 +3,8 @@ import { setLocalStorage, getLocalStorage } from '../../utils';
 
 
 const GameMode = () => {
-    const [defaultMode, setDefaultMode] = useState(JSON.parse(localStorage.getItem('default-mode')));
-    const [speed, setSpeed] = useState(JSON.parse(localStorage.getItem('speed')));
+    const [defaultMode, setDefaultMode] = useState(getLocalStorage('default-mode'));
+    const [speed, setSpeed] = useState(getLocalStorage('speed'));
 
     useEffect(() => {
         setLocalStorage('default-mode', defaultMode);
